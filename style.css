@@ -17,6 +17,8 @@
 
     --radius-md: 0.5rem;
     --radius-lg: 1rem;
+
+    --footer-height: 80px;
 }
 
 * {
@@ -184,23 +186,24 @@ ul {
 }
 
 .hero-bg {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: -2;
+    will-change: transform;
 }
 
 .hero-bg img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center 30%;
 }
 
 .hero-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -303,6 +306,55 @@ ul {
     font-size: 0.95rem;
 }
 
+/* Achievements */
+.achievements {
+    background-color: var(--color-white);
+}
+
+.achievements-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.achievements-list {
+    list-style: none;
+    padding: 0;
+}
+
+.achievements-list li {
+    display: flex;
+    align-items: baseline;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.achievements-list li:first-child {
+    border-top: 1px solid #e2e8f0;
+}
+
+.achievement-date {
+    font-weight: 700;
+    color: var(--color-accent);
+    min-width: 180px;
+    flex-shrink: 0;
+}
+
+.achievement-detail {
+    color: var(--color-text);
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .achievements-list li {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .achievement-date {
+        min-width: auto;
+    }
+}
+
 /* Contact */
 .contact {
     background-color: var(--color-primary);
@@ -324,6 +376,142 @@ ul {
     opacity: 0.9;
 }
 
+/* Contact Form */
+.contact-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--color-white);
+    padding: 3rem;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    color: var(--color-text);
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--color-primary);
+}
+
+.required {
+    color: #ef4444;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    font-weight: normal;
+    background-color: #fee2e2;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--color-text);
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.2);
+    background-color: var(--color-white);
+}
+
+.form-textarea {
+    resize: vertical;
+}
+
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper::after {
+    content: '';
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.8em;
+    height: 0.5em;
+    background-color: var(--color-text-light);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    pointer-events: none;
+}
+
+.radio-group {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+    gap: 0.5rem;
+}
+
+.radio-label input[type="radio"] {
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid #cbd5e1;
+    border-radius: 50%;
+    margin: 0;
+    outline: none;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.radio-label input[type="radio"]:checked {
+    border-color: var(--color-accent);
+}
+
+.radio-label input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.625rem;
+    height: 0.625rem;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+}
+
+.form-actions {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.form-actions .btn {
+    width: 100%;
+    max-width: 300px;
+}
+
+@media (max-width: 640px) {
+    .contact-form-container {
+        padding: 2rem 1.5rem;
+    }
+}
+
 /* Footer */
 .footer {
     background-color: var(--color-primary-light);
@@ -343,6 +531,48 @@ ul {
 .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 900;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: var(--color-accent);
+    transform: translateY(-5px);
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 80px;
+        /* Adjust for sticky footer */
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
 }
 
 /* Responsive */
@@ -380,7 +610,7 @@ ul {
         left: 0;
         width: 100%;
         background-color: rgba(255, 255, 255, 0.95);
-        padding: 12px 20px;
+        padding: 12px 16px;
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
         z-index: 1000;
         display: none;
@@ -389,6 +619,12 @@ ul {
         /* アニメーション用 */
         transform: translateY(100%);
         transition: transform 0.3s ease-out;
+
+        /* Flexbox for 2 buttons */
+        display: none;
+        /* Hidden by default, shown in media query */
+        gap: 10px;
+        justify-content: space-between;
     }
 
     /* スティッキーフッター内のボタン */
@@ -397,18 +633,29 @@ ul {
         justify-content: center;
         align-items: center;
         width: 100%;
-        padding: 14px;
-        background-color: var(--primary-color);
-        color: var(--white);
+        padding: 12px;
         font-weight: 700;
         border-radius: 8px;
-        font-size: 1rem;
-        box-shadow: 0 4px 10px rgba(0, 68, 204, 0.3);
-        gap: 8px;
+        font-size: 0.9rem;
+        gap: 6px;
+        text-decoration: none;
+        transition: opacity 0.3s;
+    }
+
+    .sticky-btn-tel {
+        background-color: var(--color-white);
+        color: var(--color-primary);
+        border: 2px solid var(--color-primary);
+    }
+
+    .sticky-btn-form {
+        background-color: var(--color-accent);
+        color: var(--color-white);
+        border: 2px solid var(--color-accent);
     }
 
     .sticky-btn:hover {
-        background-color: var(--primary-hover);
+        opacity: 0.9;
     }
 
     /* =========================================
@@ -429,7 +676,8 @@ ul {
 
         /* スティッキーフッターを表示 */
         .sticky-footer {
-            display: block;
+            display: flex;
+            /* Changed from block to flex */
             transform: translateY(0);
             /* スライドイン */
         }
