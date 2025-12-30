@@ -2,6 +2,27 @@ function onFormSubmit(e) {
     // e.namedValues から各項目を取り出し
     const values = e.namedValues;
 
+    // ========= ハニーポット判定（★追加） =========
+    // Googleフォームに追加した「ハニーポット用の設問名」に合わせる
+    const hpKey = '入力不要';
+    const honeypot = (values[hpKey] && values[hpKey][0]) ? values[hpKey][0].trim() : '';
+
+    // ハニーポットに値が入っていたら「返信しない・通知しない」
+    if (honeypot) {
+        console.log('Honeypot triggered. Skip sending emails. value=', honeypot);
+
+        // もし「自分にだけ通知したい」なら、下をONにする
+        /*
+        GmailApp.sendEmail(
+          'info@yuudai.site',
+          '【スパム疑い】フォーム送信（honeypot反応）',
+          'honeypotに値が入っていました。スプレッドシートの該当行を確認してください。\n値: ' + honeypot
+        );
+        */
+        return;
+    }
+    // ===========================================
+
     const company = values['会社名'][0];      // フォームの設問名に合わせる
     const name = values['お名前'][0];
     const email = values['メールアドレス'][0];
